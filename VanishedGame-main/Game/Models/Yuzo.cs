@@ -9,11 +9,11 @@ namespace Game
     class Yuzo
     {
         public string Name = "Yuzo";
-        public int HP;
-        public bool hatKorb;
-        public bool hatFlasche;
-        public bool hatAst;
-        public Weapon YuzosWaffe;
+        public int HealthPoints;
+        public bool hasBasket;
+        public bool hasBottle;
+        public bool hasStick;
+        public Weapon YuzosWeapon;
         public Item YuzosItem;
         public Item[] Inventory;
     }

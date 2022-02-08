@@ -21,3 +21,10 @@ C:\Users\FabianLabus\Desktop\VanishedGame-main\Game\obj\Debug\Game.csproj.Assemb
 C:\Users\FabianLabus\Desktop\VanishedGame-main\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
 C:\Users\FabianLabus\Desktop\VanishedGame-main\Game\obj\Debug\Game.exe
 C:\Users\FabianLabus\Desktop\VanishedGame-main\Game\obj\Debug\Game.pdb
+C:\Users\FabianLabus\source\repos\Ausbildung\VanishedGame-main\Game\bin\Debug\Game.exe.config
+C:\Users\FabianLabus\source\repos\Ausbildung\VanishedGame-main\Game\bin\Debug\Game.exe
+C:\Users\FabianLabus\source\repos\Ausbildung\VanishedGame-main\Game\bin\Debug\Game.pdb
+C:\Users\FabianLabus\source\repos\Ausbildung\VanishedGame-main\Game\obj\Debug\Game.csproj.AssemblyReference.cache
+C:\Users\FabianLabus\source\repos\Ausbildung\VanishedGame-main\Game\obj\Debug\Game.csproj.CoreCompileInputs.cache
+C:\Users\FabianLabus\source\repos\Ausbildung\VanishedGame-main\Game\obj\Debug\Game.exe
+C:\Users\FabianLabus\source\repos\Ausbildung\VanishedGame-main\Game\obj\Debug\Game.pdb

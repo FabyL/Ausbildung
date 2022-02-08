@@ -10,6 +10,6 @@ namespace Game
     {
         public string Name { get; set; }
 
-        public string Effekt { get; set; }
+        public string Effect { get; set; }
     }
 }

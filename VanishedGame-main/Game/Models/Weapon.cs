@@ -9,7 +9,7 @@ namespace Game
     class Weapon
     {
         public string Name;
-        public int Schaden;
-        public int Haltbarkeit;
+        public int Damage;
+        public int Durability;
     }
 }
