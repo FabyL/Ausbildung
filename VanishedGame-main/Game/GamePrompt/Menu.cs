@@ -17,6 +17,8 @@ namespace Game
             {
                 case "Ja":
                     Console.WriteLine("Drücke eine beliebige Taste um das Spiel zu beenden.");
+                    Console.ReadKey();
+                    Environment.Exit(0);
                     break;
                 case "Nein":
                     Adventure.Play(yuzo);
