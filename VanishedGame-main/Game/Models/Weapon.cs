@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    internal class Waffe
+    class Weapon
     {
         public string Name;
         public int Schaden;

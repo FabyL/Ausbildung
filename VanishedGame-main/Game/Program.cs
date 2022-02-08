@@ -10,11 +10,19 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            var yuzo = new Yuzo();
-            EinführungsText(yuzo);
-            Spielen(yuzo);
+            StartGame();
         }
-        public static void Spielen(Yuzo yuzo)
+
+        private static void StartGame()
+        {
+            var yuzo = new Yuzo();
+            //   Introduction(yuzo);
+
+            Introduction.Show(yuzo);
+            Play(yuzo);
+        }
+
+        public static void Play(Yuzo yuzo)
         {
             Console.WriteLine("Was willst du tun?: (Gebe Inventar, Bett, Korb, Flasche oder Waffe ein, um dahin zu gehen.)");
 
@@ -39,21 +47,15 @@ namespace Game
                     break;
                 case "Waffe":
                     InspiziereWaffe(yuzo);
-                    Spielen(yuzo);
+                    Play(yuzo);
                     break;
                 default:
                     Console.WriteLine("Bitte gebe nur die bereits genannten Commands ein.");
-                    Spielen(yuzo);
+                    Play(yuzo);
                     break;
             }
         }      
-        public static void EinführungsText(Yuzo yuzo)
-        {
-            Console.WriteLine("Du befindest dich in einer Höhle und dein schädel brummt.");
-            Console.WriteLine("Du kannst dich an nichts mehr erinnern und siehst dich um.");
-            Console.WriteLine("Du siehst: Ein improvisiertes Bett, einen gefüllten Tragekorb und eine Kürbisflasche.");
-            Console.WriteLine("Wenn du das Spiel beenden möchtest, schreibe: Quit");
-        }
+      
         public static void SpielBeenden(Yuzo yuzo)
         {
             Console.WriteLine("Möchtest du das Spiel beenden? (Ja/Nein)");
@@ -63,10 +65,10 @@ namespace Game
             {
                 case "Ja":
                     Console.WriteLine("Drücke eine beliebige Taste um das Spiel zu beenden.");
-                    return;
+                 //   return;
                     break;
                 case "Nein":
-                    Spielen(yuzo);
+                    Play(yuzo);
                     break;
                 default:
                     Console.WriteLine("Bitte wähle eine Möglichkeit aus.");
@@ -89,7 +91,7 @@ namespace Game
                         break;
                     case "Nein":
                         Console.WriteLine("Du gehst wieder vom Bett weg.");
-                        Spielen(yuzo);
+                        Play(yuzo);
                         break;
                     default:
                         Console.WriteLine("Bitte versuche es erneut.");
@@ -103,11 +105,11 @@ namespace Game
                 {
                     case "Ja":
                         Console.WriteLine("Du fühlst dich nach dem Schlaf erholt.");
-                        Spielen(yuzo);
+                        Play(yuzo);
                         break;
                     case "Nein":
                         Console.WriteLine("Du gehst wieder vom Bett weg.");
-                        Spielen(yuzo);
+                        Play(yuzo);
                         break;
                     default:
                         Console.WriteLine("Bitte versuche es erneut.");
@@ -130,14 +132,14 @@ namespace Game
                 {
                     case "Ja":
                         yuzo.hatAst = true;
-                        yuzo.YuzosWaffe = new Waffe { Name = "Ast", Haltbarkeit = 20, Schaden = 1 };
+                        yuzo.YuzosWaffe = new Weapon { Name = "Ast", Haltbarkeit = 20, Schaden = 1 };
                         Console.WriteLine("Du hast den Ast mitgenommen.");
                         Console.WriteLine("Gebe Waffe ein, um deine Waffe anzuschauen.");
-                        Spielen(yuzo);
+                        Play(yuzo);
                         break;
                     case "Nein":
                         Console.WriteLine("Du lässt den Ast liegen.");
-                        Spielen(yuzo);
+                        Play(yuzo);
                         break;
                     default:
                         Console.WriteLine("Bitte versuche es erneut.");
@@ -145,7 +147,7 @@ namespace Game
                         break;
                 }
             }
-            Spielen(yuzo);
+            Play(yuzo);
         }
         public static void GeheZumStartKorb(Yuzo yuzo)
         {
@@ -174,7 +176,7 @@ namespace Game
                         break;
                 }
             }
-            Spielen(yuzo);
+            Play(yuzo);
         }
         public static void GeheZurStartFlasche(Yuzo yuzo)
         {
@@ -200,7 +202,7 @@ namespace Game
                             break;
                         case "Nein":
                             Console.WriteLine("Du lässt die Flasche stehen");
-                            Spielen(yuzo);
+                            Play(yuzo);
                             break;
                         default:
                             Console.WriteLine("Bitte versuche es erneut.");
@@ -225,7 +227,7 @@ namespace Game
                     }
                 }              
             }
-            Spielen(yuzo);
+            Play(yuzo);
         }
         public static void OpenInventory(Yuzo yuzo)
         {
@@ -237,7 +239,7 @@ namespace Game
             {
                 Console.WriteLine("Dein Inventar ist leer.");
             }
-            Spielen(yuzo);
+            Play(yuzo);
         }
         public static void InspiziereWaffe(Yuzo yuzo)
         {
@@ -249,7 +251,7 @@ namespace Game
             {
                 Console.WriteLine("Du hast keine Waffe.");
             }
-            Spielen(yuzo);
+            Play(yuzo);
         }
         public static void AddItem(Yuzo yuzo)
         {
