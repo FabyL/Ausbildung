@@ -9,6 +9,6 @@ namespace Game
     class NonPlayerCharacter // Waffen klasse hinzufügen
     {
         public string Name;
-        public int HP;
+        public int HealthPoints;
     }
 }

@@ -6,14 +6,22 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class Introduction
+    class GameText
     {
-        public static void Show(Yuzo yuzo)
+        public static void Introduction(Yuzo yuzo)
         {
             Console.WriteLine("Du befindest dich in einer Höhle und dein schädel brummt.");
             Console.WriteLine("Du kannst dich an nichts mehr erinnern und siehst dich um.");
             Console.WriteLine("Du siehst: Ein improvisiertes Bett, einen gefüllten Tragekorb und eine Kürbisflasche.");
             Console.WriteLine("Wenn du das Spiel beenden möchtest, schreibe: Quit");
+        }
+        public static void InvalidChoice(Yuzo yuzo)
+        {
+            Console.WriteLine("Bitte gebe nur die bereits genannten Commands ein.");
+        }
+        public static void InvalidInput(Yuzo yuzo)
+        {
+            Console.WriteLine("Bitte versuche es erneut.");
         }
     }
 }
