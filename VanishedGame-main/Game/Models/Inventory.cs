@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game
+namespace Game.Models
 {
-    class Item
+    class Inventory
     {
-        public string Name { get; set; }
-        public string Effect { get; set; }
     }
 }

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="GamePrompt\GameText.cs" />
     <Compile Include="GamePrompt\Menu.cs" />
+    <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\NonPlayerCharacter.cs" />
     <Compile Include="User\Adventure.cs" />
