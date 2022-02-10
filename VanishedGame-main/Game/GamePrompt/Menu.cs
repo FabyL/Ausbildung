@@ -31,9 +31,15 @@ namespace Game
         }
         public static void OpenInventory(Yuzo yuzo)
         {
-            if (yuzo.YuzosItem != null)
+            if (yuzo.Inventory != null)
             {
-                Console.WriteLine($"Name: {yuzo.YuzosItem.Name}, Effekt: {yuzo.YuzosItem.Effect}");
+                foreach (var item in yuzo.Inventory)
+                {
+                    if (item != null)
+                    {
+                        Console.WriteLine($"Name: {item.Name}, Effekt: {item.Effect}");
+                    }                        
+                }
             }
             else
             {

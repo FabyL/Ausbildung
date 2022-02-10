@@ -53,7 +53,7 @@ namespace Game
             Console.WriteLine("Du stehst vor dem Bett. Möchtest du ein schläfchen machen? (Schreib: Ja/Nein)");
             var Choice = Console.ReadLine();
 
-            if (yuzo.hasStick == false)
+            if (yuzo.HasStick == false)
             {
                 switch (Choice)
                 {
@@ -101,7 +101,7 @@ namespace Game
                 switch (Choice)
                 {
                     case "Ja":
-                        yuzo.hasStick = true;
+                        yuzo.HasStick = true;
                         yuzo.YuzosWeapon = new Weapon { Name = "Ast", Durability = 20, Damage = 1 };
                         Console.WriteLine("Du hast den Ast mitgenommen.");
                         Console.WriteLine("Gebe Waffe ein, um deine Waffe anzuschauen.");
@@ -121,20 +121,19 @@ namespace Game
         }
         public static void GoToStartBasket(Yuzo yuzo)
         {
-            if (yuzo.hasBasket)
+            if (yuzo.HasBasket)
             {
                 Console.WriteLine("Du hast den Korb schon mitgenommen.");
             }
             else
             {
-                Console.WriteLine("Der Korb ist gefüllt mit Nahrung. Möchtest du den Korb mitnehmen? (Schreib: Ja/Nein)");
+                Console.WriteLine("Der Korb ist leer. Möchtest du den Korb mitnehmen? (Schreib: Ja/Nein)");
                 var Choice = Console.ReadLine();
                 switch (Choice)
                 {
                     case "Ja":
-                        Item Korb = new Item();
-                        yuzo.hasBasket = true;
-                        yuzo.YuzosItem = new Item { Name = "Korb", Effect = "Kann Sachen mitnehmen" };
+                        yuzo.Inventory = new Item[5];
+                        yuzo.HasBasket = true;
                         Console.WriteLine("Du nimmst den Korb mit.");
                         break;
                     case "Nein":
@@ -150,7 +149,7 @@ namespace Game
         }
         public static void GoToStartBottle(Yuzo yuzo)
         {
-            if (yuzo.hasBottle)
+            if (yuzo.HasBottle)
             {
                 Console.WriteLine("Du hast die Flasche schon mitgenommen.");
             }
@@ -159,14 +158,14 @@ namespace Game
                 Console.WriteLine("Die Flasche ist mit Wasser gefüllt. Möchtest du die Flasche mitnehmen? (Schreib: Ja/Nein)");
                 var Choice = Console.ReadLine();
 
-                if (yuzo.hasBasket)
+                if (yuzo.HasBasket)
                 {
                     switch (Choice)
                     {
                         case "Ja":
                             Item Flasche = new Item();
-                            yuzo.hasBottle = true;
-                            yuzo.YuzosItem = new Item { Name = "Flasche", Effect = "Füllt einen kleinen HP Anteil." };
+                            yuzo.HasBottle = true;
+                            yuzo.Take(new Item { Name = "Flasche", Effect = "Füllt einen kleinen HP Anteil." });
                             Console.WriteLine("Du verstaust die Flasche in den Korb.");
                             break;
                         case "Nein":

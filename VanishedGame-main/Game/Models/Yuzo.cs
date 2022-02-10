@@ -10,11 +10,28 @@ namespace Game
     {
         public string Name = "Yuzo";
         public int HealthPoints;
-        public bool hasBasket;
-        public bool hasBottle;
-        public bool hasStick;
+        public bool HasBasket;
+        public bool HasBottle;
+        public bool HasStick;
         public Weapon YuzosWeapon;
         public Item YuzosItem;
         public Item[] Inventory;
+
+        public bool Take(Item item)
+        {
+            bool itemStored = false;
+            if(Inventory != null)
+            {
+                for (int i = 0; i < Inventory.Length; i++)
+                {
+                    if(Inventory[i] == null)
+                    {
+                        Inventory[i] = item;
+                        itemStored = true;
+                    }
+                }
+            }
+            return itemStored;
+        }
     }
 }
