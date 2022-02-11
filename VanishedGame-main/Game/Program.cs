@@ -10,14 +10,7 @@ namespace Game
     {
         static void Main(string[] args)
         {
-            StartGame();
-        }
-        private static void StartGame()
-        {
-            var yuzo = new Yuzo();
-
-            GameText.Introduction(yuzo);
-            Adventure.Play(yuzo);
+            Adventure.StartGame();
         }
     }
 }

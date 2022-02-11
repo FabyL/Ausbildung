@@ -15,11 +15,11 @@ namespace Game
             Console.WriteLine("Du siehst: Ein improvisiertes Bett, einen gefüllten Tragekorb und eine Kürbisflasche.");
             Console.WriteLine("Wenn du das Spiel beenden möchtest, schreibe: Quit");
         }
-        public static void InvalidChoice(Yuzo yuzo)
+        public static void InvalidChoice()
         {
             Console.WriteLine("Bitte gebe nur die bereits genannten Commands ein.");
         }
-        public static void InvalidInput(Yuzo yuzo)
+        public static void InvalidInput()
         {
             Console.WriteLine("Bitte versuche es erneut.");
         }

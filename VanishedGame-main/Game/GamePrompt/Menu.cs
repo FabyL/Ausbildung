@@ -8,6 +8,19 @@ namespace Game
 {
     class Menu
     {
+
+        public static List<string> MenuChoices { get; } = new List<string> { "Reset"};
+
+        public static void Run(string userInput)
+        {
+            switch(userInput)
+            {
+                case "Reset":
+                    Adventure.StartGame();
+                    break;
+            }
+        }
+
         public static void QuitGame(Yuzo yuzo)
         {
             Console.WriteLine("Möchtest du das Spiel beenden? (Ja/Nein)");

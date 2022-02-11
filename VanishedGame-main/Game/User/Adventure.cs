@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Game
 {
     class Adventure
     {
-        private static void StartGame()
+        public static void StartGame()
         {
             var yuzo = new Yuzo();
 
@@ -17,35 +18,44 @@ namespace Game
         }
         public static void Play(Yuzo yuzo)
         {
-            Console.WriteLine("Was willst du tun?: (Gebe Inventar, Bett, Korb, Flasche oder Waffe ein, um dahin zu gehen.)");
+           // Console.WriteLine("Was willst du tun?: (Gebe Inventar, Bett, Korb, Flasche oder Waffe ein, um dahin zu gehen.)");
+            
+            List<string> choices = new List<string> { "Bett", "Korb" , "Flasche", "Waffe" };
+            
+            var Choice = Input.Run("Was willst du tun ?: (Gebe Inventar, Bett, Korb, Flasche oder Waffe ein, um dahin zu gehen.)", choices);
 
-            var Choice = Console.ReadLine();
 
-            switch (Choice)
+            if(Choice != null)
             {
-                case "Quit":
-                    Menu.QuitGame(yuzo);
-                    break;
-                case "Inventar":
-                    Menu.OpenInventory(yuzo);
-                    break;
-                case "Bett":
-                    GoToStartBed(yuzo);
-                    break;
-                case "Korb":
-                    GoToStartBasket(yuzo);
-                    break;
-                case "Flasche":
-                    GoToStartBottle(yuzo);
-                    break;
-                case "Waffe":
-                    Menu.InspectWeapon(yuzo);
-                    Play(yuzo);
-                    break;
-                default:
-                    GameText.InvalidChoice(yuzo);
-                    Play(yuzo);
-                    break;
+                switch (Choice)
+                {
+                    //    case "Quit":
+                    //    Menu.QuitGame(yuzo);
+                    //    break;
+                    //    case "Inventar":
+                    //    Menu.OpenInventory(yuzo);
+                    //    break;
+                    case "Bett":
+                        GoToStartBed(yuzo);
+                        break;
+                    case "Korb":
+                        GoToStartBasket(yuzo);
+                        break;
+                    case "Flasche":
+                        GoToStartBottle(yuzo);
+                        break;
+                    case "Waffe":
+                        Menu.InspectWeapon(yuzo);
+                        Play(yuzo);
+                        break;
+                }
+
+
+           
+                //default:
+                //    GameText.InvalidChoice(yuzo);
+                //    Play(yuzo);
+                //    break;
             }
         }
         public static void GoToStartBed(Yuzo yuzo)
@@ -66,7 +76,7 @@ namespace Game
                         Play(yuzo);
                         break;
                     default:
-                        GameText.InvalidInput(yuzo);
+                        GameText.InvalidInput();
                         GoToStartBed(yuzo);
                         break;
                 }
@@ -84,7 +94,7 @@ namespace Game
                         Play(yuzo);
                         break;
                     default:
-                        GameText.InvalidInput(yuzo);
+                        GameText.InvalidInput();
                         GoToStartBed(yuzo);
                         break;
                 }
@@ -112,7 +122,7 @@ namespace Game
                         Play(yuzo);
                         break;
                     default:
-                        GameText.InvalidInput(yuzo);
+                        GameText.InvalidInput();
                         FindeStartAst(yuzo);
                         break;
                 }
@@ -140,7 +150,7 @@ namespace Game
                         Console.WriteLine("Du lässt den Korb stehen.");
                         break;
                     default:
-                        GameText.InvalidInput(yuzo);
+                        GameText.InvalidInput();
                         GoToStartBasket(yuzo);
                         break;
                 }
@@ -173,7 +183,7 @@ namespace Game
                             Play(yuzo);
                             break;
                         default:
-                            GameText.InvalidInput(yuzo);
+                            GameText.InvalidInput();
                             GoToStartBasket(yuzo);
                             break;
                     }
@@ -189,7 +199,7 @@ namespace Game
                             Console.WriteLine("Du lässt die Flasche liegen.");
                             break;
                         default:
-                            GameText.InvalidInput(yuzo);
+                            GameText.InvalidInput();
                             GoToStartBottle(yuzo);
                             break;
                     }
