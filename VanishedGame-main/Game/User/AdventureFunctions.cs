@@ -15,13 +15,16 @@ namespace Game
             switch (userInput)
             {
                 case "bett":
-                    Adventure.GoToStartBed(yuzo);
+                    Adventure.GoToBedLevel1(yuzo);
                     break;
                 case "korb":
-                    Adventure.GoToStartBasket(yuzo);
+                    Adventure.GoToBasketLevel1(yuzo);
                     break;
                 case "flasche":
-                    Adventure.GoToStartBottle(yuzo);
+                    Adventure.GoToBottleLevel1(yuzo);
+                    break;
+                case "verlassen":
+                    Adventure.LeaveCave(yuzo);
                     break;
             }
         }

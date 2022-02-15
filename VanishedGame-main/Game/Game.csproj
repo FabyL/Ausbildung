@@ -54,6 +54,7 @@
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Models\Yuzo.cs" />
     <Compile Include="User\AdventureFunctions.cs" />
+    <Compile Include="User\Level2.cs" />
     <Compile Include="Utilities\Input.cs" />
   </ItemGroup>
   <ItemGroup>

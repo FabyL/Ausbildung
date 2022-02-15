@@ -10,8 +10,6 @@ namespace Game
 {
     class Menu
     {
-        public static List<string> MenuChoices { get; } = new List<string> { "reset", "quit", "waffe"};
-
         public static void Run(string userInput, Yuzo yuzo)
         {
             switch(userInput)
@@ -20,11 +18,14 @@ namespace Game
                     Adventure.StartGame();
                     break;
                 case "quit":
-                    Environment.Exit(0);
+                    QuitGame(yuzo);
+                    break;
+                case "inventar":
+                    OpenInventory(yuzo);
                     break;
                 case "waffe":
                     InspectWeapon(yuzo);
-                    Adventure.Play(yuzo);
+                    Adventure.PlayLevel1(yuzo);
                     break;
             }
         }
@@ -42,7 +43,7 @@ namespace Game
                     Environment.Exit(0);
                     break;
                 case "nein":
-                    Adventure.Play(yuzo);
+                    Adventure.PlayLevel1(yuzo);
                     break;
                 default:
                     Console.WriteLine("Bitte wähle eine Möglichkeit aus.");
@@ -66,7 +67,7 @@ namespace Game
             {
                 Console.WriteLine("Dein Inventar ist leer.");
             }
-            Adventure.Play(yuzo);
+            Adventure.PlayLevel1(yuzo);
         }
         public static void InspectWeapon(Yuzo yuzo)
         {
@@ -78,7 +79,7 @@ namespace Game
             {
                 Console.WriteLine("Du hast keine Waffe.");
             }
-            Adventure.Play(yuzo);
+            Adventure.PlayLevel1(yuzo);
         }
     }
 }
