@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,32 +9,38 @@ namespace Game
 {
     class Menu
     {
+        public static List<string> MenuChoices { get; } = new List<string> { "reset", "quit", "waffe"};
 
-        public static List<string> MenuChoices { get; } = new List<string> { "Reset"};
-
-        public static void Run(string userInput)
+        public static void Run(string userInput, Yuzo yuzo)
         {
             switch(userInput)
             {
-                case "Reset":
+                case "reset":
                     Adventure.StartGame();
+                    break;
+                case "quit":
+                    Environment.Exit(0);
+                    break;
+                case "waffe":
+                    InspectWeapon(yuzo);
+                    Adventure.Play(yuzo);
                     break;
             }
         }
 
         public static void QuitGame(Yuzo yuzo)
         {
-            Console.WriteLine("Möchtest du das Spiel beenden? (Ja/Nein)");
-            var Choice = Console.ReadLine();
+            Console.WriteLine("Möchtest du das Spiel beenden? (ja/nein)");
+            var Choice = Console.ReadLine().ToLower();
 
             switch (Choice)
             {
-                case "Ja":
+                case "ja":
                     Console.WriteLine("Drücke eine beliebige Taste um das Spiel zu beenden.");
                     Console.ReadKey();
                     Environment.Exit(0);
                     break;
-                case "Nein":
+                case "nein":
                     Adventure.Play(yuzo);
                     break;
                 default:
