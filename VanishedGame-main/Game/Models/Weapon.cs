@@ -9,8 +9,9 @@ namespace Game
 {
     class Weapon
     {
-        public string Name;
-        public int Damage;
-        public int Durability;
+        public string Name { get; set; }
+        public int Damage { get; set; }
+        public int Durability { get; set; }
+        public int Attack { get; set; } //Attacke wird beschrieben
     }
 }

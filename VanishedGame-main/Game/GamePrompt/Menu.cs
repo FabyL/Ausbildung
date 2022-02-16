@@ -15,10 +15,14 @@ namespace Game
             switch(userInput)
             {
                 case "reset":
+                    Console.WriteLine("\n");
                     Adventure.StartGame();
                     break;
                 case "quit":
                     QuitGame(yuzo);
+                    break;
+                case "hp":
+                    ShowHP(yuzo);
                     break;
                 case "inventar":
                     OpenInventory(yuzo);
@@ -29,7 +33,6 @@ namespace Game
                     break;
             }
         }
-
         public static void QuitGame(Yuzo yuzo)
         {
             Console.WriteLine("Möchtest du das Spiel beenden? (ja/nein)");
@@ -51,6 +54,11 @@ namespace Game
                     break;
             }
         }
+        public static void ShowHP(Yuzo yuzo)
+        {
+            Console.WriteLine("Du hast {0} Leben", yuzo.HealthPoints);
+            Adventure.PlayLevel1(yuzo);
+        }
         public static void OpenInventory(Yuzo yuzo)
         {
             if (yuzo.Inventory != null)
@@ -59,7 +67,7 @@ namespace Game
                 {
                     if (item != null)
                     {
-                        Console.WriteLine($"Name: {item.Name}, Effekt: {item.Effect}");
+                        Console.WriteLine($"Name: {item.Name}, Effekt: {item.EffectDescription}");
                     }                        
                 }
             }
