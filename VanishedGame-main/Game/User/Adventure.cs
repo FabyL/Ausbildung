@@ -10,13 +10,14 @@ namespace Game
 {
     class Adventure
     {
-        public static List<string> MenuChoices = new List<string> { "reset", "quit", "waffe", "inventar" };
+        public static List<string> MenuChoices = new List<string> { "reset", "quit", "waffe", "inventar", "hp" };
         public static List<string> YesNoChoices = new List<string> { "ja", "nein" };
-        public static List<string> Level1Choices = new List<string> { "bett", "korb", "flasche", "verlassen" };
+        public static List<string> Level1Choices = new List<string> { "bett", "korb", "flasche", "trinken", "verlassen" };
 
         public static void StartGame()
         {
             var yuzo = new Yuzo();
+            yuzo.HealthPoints = 50;
 
             GameText.Introduction(yuzo);
             PlayLevel1(yuzo);
@@ -24,7 +25,7 @@ namespace Game
         }
         public static void PlayLevel1(Yuzo yuzo)
         {             
-           var Choice = Input.Run("Was willst du tun ?: (Gebe Inventar, Bett, Korb, Flasche oder Waffe ein, um dahin zu gehen.)", Level1Choices, MenuChoices, YesNoChoices, yuzo);
+           var Choice = Input.Run("Was willst du tun ?: (Gebe Inventar, Bett, Korb oder Flasche ein, um dahin zu gehen.)\n(Gebe Waffe oder hp ein um jene anzusehen)", Level1Choices, MenuChoices, YesNoChoices, yuzo);
 
             if(Choice != null)
             {
@@ -38,6 +39,10 @@ namespace Game
                         break;
                     case "flasche":
                         GoToBottleLevel1(yuzo);
+                        break;
+                    case "trinken":
+                        yuzo.UseBottle();
+                        PlayLevel1(yuzo);
                         break;
                     case "verlassen":
                         LeaveCave(yuzo);
@@ -160,10 +165,9 @@ namespace Game
                     switch (Choice)
                     {
                         case "ja":
-                            Item Flasche = new Item();
                             yuzo.HasBottle = true;
-                            yuzo.Take(new Item { Name = "Flasche", Effect = "Füllt einen kleinen HP Anteil." });
-                            Console.WriteLine("Du verstaust die Flasche in den Korb.");
+                            yuzo.Take(new PumpkinBottle { Name = "Kürbisflasche", EffectDescription = "Füllt einen kleinen HP Anteil. (Gebe trinken ein um 10 HP zu füllen)" });
+                            Console.WriteLine("Du verstaust die Flasche in den Korb. \n(Gebe Inventar ein um dir die Flasche anzusehen)");
                             break;
                         case "nein":
                             Console.WriteLine("Du lässt die Flasche stehen");

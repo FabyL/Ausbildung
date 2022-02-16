@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class Yuzo
+    class Yuzo : Character
     {
         public string Name = "Yuzo";
+        public int MaxHealthPoints = 70;
         public int HealthPoints;
         public bool HasBasket;
         public bool HasBottle;
@@ -25,7 +26,7 @@ namespace Game
             {
                 for (int i = 0; i < Inventory.Length; i++)
                 {
-                    if(Inventory[i] == null)
+                    if(Inventory[i] == null && !itemStored)
                     {
                         Inventory[i] = item;
                         itemStored = true;
@@ -33,6 +34,34 @@ namespace Game
                 }
             }
             return itemStored;
+        }
+        public bool UseBottle()
+        {
+            bool hasUsedBottle = false;
+            var bottle = GetBottleFromInventory();
+            if(bottle != null)
+            {
+                bottle.DrinkWater(this);
+                hasUsedBottle = true;
+            }
+            return hasUsedBottle;
+        }
+
+        private PumpkinBottle GetBottleFromInventory()
+        {
+            PumpkinBottle returnbottle = null;
+
+            if (Inventory != null)
+            {             
+                foreach (var item in Inventory)
+                {
+                    if (item is PumpkinBottle)
+                    {
+                        returnbottle = (PumpkinBottle)item;
+                    }
+                }
+            }         
+            return returnbottle;
         }
     }
 }

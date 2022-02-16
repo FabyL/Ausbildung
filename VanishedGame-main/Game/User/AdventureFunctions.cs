@@ -23,6 +23,10 @@ namespace Game
                 case "flasche":
                     Adventure.GoToBottleLevel1(yuzo);
                     break;
+                case "trinken":
+                    yuzo.UseBottle();
+                    Adventure.PlayLevel1(yuzo);
+                    break;
                 case "verlassen":
                     Adventure.LeaveCave(yuzo);
                     break;

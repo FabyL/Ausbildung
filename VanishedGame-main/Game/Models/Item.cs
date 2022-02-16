@@ -10,6 +10,6 @@ namespace Game
     class Item
     {
         public string Name { get; set; }
-        public string Effect { get; set; }
+        public string EffectDescription { get; set; }
     }
 }
