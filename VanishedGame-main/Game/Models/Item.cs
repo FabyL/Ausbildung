@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class Item
+    abstract class Item
     {
         public string Name { get; set; }
-        public string EffectDescription { get; set; }
+        public abstract string EffectDescription { get; set; }
     }
 }

@@ -81,7 +81,7 @@ namespace Game
         {
             if (yuzo.YuzosWeapon != null)
             {
-                Console.WriteLine($"Name: {yuzo.YuzosWeapon.Name}, Schaden: {yuzo.YuzosWeapon.Damage}, Haltbarkeit: {yuzo.YuzosWeapon.Durability}");
+                Console.WriteLine($"Name: {yuzo.YuzosWeapon.Name}, Schaden: {yuzo.YuzosWeapon.Damage}, Angriff: {yuzo.YuzosWeapon.Attack}");
             }
             else
             {
