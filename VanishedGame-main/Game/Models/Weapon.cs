@@ -11,7 +11,6 @@ namespace Game
     {
         public string Name { get; set; }
         public int Damage { get; set; }
-        public int Durability { get; set; }
-        public int Attack { get; set; } //Attacke wird beschrieben
+        public string Attack { get; set; } //Attacke wird beschrieben
     }
 }

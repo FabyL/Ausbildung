@@ -18,6 +18,13 @@ namespace Game
         public Weapon YuzosWeapon;
         public Item YuzosItem;
         public Item[] Inventory;
+        public bool Dead
+        {
+            get
+            {
+                return HealthPoints <= 0;
+            }
+        }
 
         public bool Take(Item item)
         {

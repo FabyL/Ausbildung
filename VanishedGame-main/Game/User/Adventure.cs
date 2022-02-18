@@ -25,7 +25,7 @@ namespace Game
         }
         public static void PlayLevel1(Yuzo yuzo)
         {             
-           var Choice = Input.Run("Was willst du tun ?: (Gebe Inventar, Bett, Korb oder Flasche ein, um dahin zu gehen.)\n(Gebe Waffe oder hp ein um jene anzusehen)", Level1Choices, MenuChoices, YesNoChoices, yuzo);
+           var Choice = Input.Run("Was willst du tun ?: (Gebe Inventar, Bett, Korb, Flasche, Waffe oder HP ein, um damit zu interagieren. zu gehen.)", Level1Choices, MenuChoices, YesNoChoices, yuzo);
 
             if(Choice != null)
             {
@@ -106,7 +106,7 @@ namespace Game
                 {
                     case "ja":
                         yuzo.HasStick = true;
-                        yuzo.YuzosWeapon = new Weapon { Name = "Ast", Durability = 20, Damage = 1 };
+                        yuzo.YuzosWeapon = new Weapon { Name = "Ast", Damage = 14, Attack = "Schlägt den Gegner mit dem Ast " };
                         Console.WriteLine("Du hast den Ast mitgenommen.");
                         Console.WriteLine("Gebe Waffe ein, um deine Waffe anzuschauen.");
                         PlayLevel1(yuzo);
@@ -166,7 +166,7 @@ namespace Game
                     {
                         case "ja":
                             yuzo.HasBottle = true;
-                            yuzo.Take(new PumpkinBottle { Name = "Kürbisflasche", EffectDescription = "Füllt einen kleinen HP Anteil. (Gebe trinken ein um 10 HP zu füllen)" });
+                            yuzo.Take(new PumpkinBottle());
                             Console.WriteLine("Du verstaust die Flasche in den Korb. \n(Gebe Inventar ein um dir die Flasche anzusehen)");
                             break;
                         case "nein":

@@ -48,7 +48,7 @@
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\Item.cs" />
-    <Compile Include="Models\NonPlayerCharacter.cs" />
+    <Compile Include="Models\DrunkStranger.cs" />
     <Compile Include="Models\PumpkinBottle.cs" />
     <Compile Include="User\Adventure.cs" />
     <Compile Include="Program.cs" />
@@ -56,7 +56,7 @@
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Models\Yuzo.cs" />
     <Compile Include="User\AdventureFunctions.cs" />
-    <Compile Include="User\Fight.cs" />
+    <Compile Include="User\Battle.cs" />
     <Compile Include="User\Level2.cs" />
     <Compile Include="Utilities\Input.cs" />
   </ItemGroup>
