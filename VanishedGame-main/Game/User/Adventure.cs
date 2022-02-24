@@ -10,69 +10,63 @@ namespace Game
 {
     class Adventure
     {
-        public static List<string> MenuChoices = new List<string> { "reset", "quit", "waffe", "inventar", "hp" };
+        public static List<string> MenuChoices = new List<string> { "reset", "quit", "waffe", "inventar", "hp", "xp" };
         public static List<string> YesNoChoices = new List<string> { "ja", "nein" };
         public static List<string> Level1Choices = new List<string> { "bett", "korb", "flasche", "trinken", "verlassen" };
 
         public static void StartGame()
         {
-            var yuzo = new Yuzo();
-            yuzo.HealthPoints = 50;
-
-            GameText.Introduction(yuzo);
-            PlayLevel1(yuzo);
-
+            LevelGeneration.GenerateLevel1();
         }
-        public static void PlayLevel1(Yuzo yuzo)
-        {             
-           var Choice = Input.Run("Was willst du tun ?: (Gebe Inventar, Bett, Korb, Flasche, Waffe oder HP ein, um damit zu interagieren. zu gehen.)", Level1Choices, MenuChoices, YesNoChoices, yuzo);
+        public static void PlayLevel1(Yuzo yuzo, Cave cave)
+        {
+           var Choice = InputLevel1.Run("\nWas willst du tun ?: (Gebe Inventar, Bett, Korb, Flasche, Waffe oder HP ein, um damit zu interagieren.)", Level1Choices, MenuChoices, YesNoChoices, yuzo, cave);
 
             if(Choice != null)
             {
                 switch (Choice)
                 {
                     case "bett":
-                        GoToBedLevel1(yuzo);
+                        GoToBedLevel1(yuzo, cave);
                         break;
                     case "korb":
-                        GoToBasketLevel1(yuzo);
+                        GoToBasketLevel1(yuzo, cave);
                         break;
                     case "flasche":
-                        GoToBottleLevel1(yuzo);
+                        GoToBottleLevel1(yuzo, cave);
                         break;
                     case "trinken":
                         yuzo.UseBottle();
-                        PlayLevel1(yuzo);
+                        PlayLevel1(yuzo, cave);
                         break;
                     case "verlassen":
-                        LeaveCave(yuzo);
+                        LeaveCave(yuzo, cave);
                         break;
                     default:
                         GameText.InvalidChoice();
-                        PlayLevel1(yuzo);
+                        PlayLevel1(yuzo, cave);
                         break;
                 }
             }
         }
-        public static void GoToBedLevel1(Yuzo yuzo)
+        public static void GoToBedLevel1(Yuzo yuzo, Cave cave)
         {
-            var Choice = Input.Run("Du stehst vor dem Bett. Möchtest du ein schläfchen machen? (Schreib: Ja/Nein)", Level1Choices, MenuChoices, YesNoChoices, yuzo);
+            var Choice = InputLevel1.Run("\nDu stehst vor dem Bett. Möchtest du ein schläfchen machen? (Schreib: Ja/Nein)", Level1Choices, MenuChoices, YesNoChoices, yuzo, cave);
 
-            if (yuzo.HasStick == false)
+            if (yuzo.YuzosWeapon == null)
             {
                 switch (Choice)
                 {
                     case "ja":
-                        if (yuzo.YuzosWeapon == null)
-                            FindStickLevel1(yuzo);
+                        FindStickLevel1(yuzo, cave);
                         break;
                     case "nein":
                         Console.WriteLine("Du gehst wieder vom Bett weg.");
-                        PlayLevel1(yuzo);
+                        PlayLevel1(yuzo, cave);
                         break;
                     default:
                         GameText.InvalidInput();
-                        GoToBedLevel1(yuzo);
+                        GoToBedLevel1(yuzo, cave);
                         break;
                 }
             }
@@ -82,61 +76,61 @@ namespace Game
                 {
                     case "ja":
                         Console.WriteLine("Du fühlst dich nach dem Schlaf erholt.");
-                        PlayLevel1(yuzo);
+                        PlayLevel1(yuzo, cave);
                         break;
                     case "nein":
                         Console.WriteLine("Du gehst wieder vom Bett weg.");
-                        PlayLevel1(yuzo);
+                        PlayLevel1(yuzo, cave);
                         break;
                     default:
                         GameText.InvalidInput();
-                        GoToBedLevel1(yuzo);
+                        GoToBedLevel1(yuzo, cave);
                         break;
                 }
             }
         }
-        public static void FindStickLevel1(Yuzo yuzo)
+        public static void FindStickLevel1(Yuzo yuzo, Cave cave)
         {
             if (yuzo.YuzosWeapon == null)
             {
                 Console.WriteLine("Zwischen den Laken findest du ein Ast.");
-                var Choice = Input.Run("Möchtest du den Ast mitnehmen? (Schreib: Ja/Nein)", Level1Choices, MenuChoices, YesNoChoices, yuzo);
+                var Choice = InputLevel1.Run("\nMöchtest du den Ast mitnehmen? (Schreib: Ja/Nein)", Level1Choices, MenuChoices, YesNoChoices, yuzo, cave);
 
                 switch (Choice)
                 {
                     case "ja":
-                        yuzo.HasStick = true;
-                        yuzo.YuzosWeapon = new Weapon { Name = "Ast", Damage = 14, Attack = "Schlägt den Gegner mit dem Ast " };
+                        yuzo.YuzosWeapon = cave.Stick;
+                        cave.Stick = null;
                         Console.WriteLine("Du hast den Ast mitgenommen.");
                         Console.WriteLine("Gebe Waffe ein, um deine Waffe anzuschauen.");
-                        PlayLevel1(yuzo);
+                        PlayLevel1(yuzo, cave);
                         break;
                     case "nein":
                         Console.WriteLine("Du lässt den Ast liegen.");
-                        PlayLevel1(yuzo);
+                        PlayLevel1(yuzo, cave);
                         break;
                     default:
                         GameText.InvalidInput();
-                        FindStickLevel1(yuzo);
+                        FindStickLevel1(yuzo, cave);
                         break;
                 }
             }
-            PlayLevel1(yuzo);
+            PlayLevel1(yuzo, cave);
         }
-        public static void GoToBasketLevel1(Yuzo yuzo)
+        public static void GoToBasketLevel1(Yuzo yuzo, Cave cave)
         {
-            if (yuzo.HasBasket)
+            if (!cave.basketStanding)
             {
-                Console.WriteLine("Du hast den Korb schon mitgenommen.");
+                Console.WriteLine("\nDu hast den Korb schon mitgenommen.");
             }
             else
             {
-                var Choice = Input.Run("Der Korb ist leer. Möchtest du den Korb mitnehmen? (Schreib: Ja/Nein)", Level1Choices, MenuChoices, YesNoChoices, yuzo);
+                var Choice = InputLevel1.Run("\nDer Korb ist leer. Möchtest du den Korb mitnehmen? (Schreib: Ja/Nein)", Level1Choices, MenuChoices, YesNoChoices, yuzo, cave);
                 switch (Choice)
                 {
                     case "ja":
+                        cave.Basket = null;
                         yuzo.Inventory = new Item[5];
-                        yuzo.HasBasket = true;
                         Console.WriteLine("Du nimmst den Korb mit.");
                         break;
                     case "nein":
@@ -144,38 +138,38 @@ namespace Game
                         break;
                     default:
                         GameText.InvalidInput();
-                        GoToBasketLevel1(yuzo);
+                        GoToBasketLevel1(yuzo, cave);
                         break;
                 }
             }
-            PlayLevel1(yuzo);
+            PlayLevel1(yuzo, cave);
         }
-        public static void GoToBottleLevel1(Yuzo yuzo)
+        public static void GoToBottleLevel1(Yuzo yuzo, Cave cave)
         {
-            if (yuzo.HasBottle)
+            if (!cave.bottleStanding)
             {
-                Console.WriteLine("Du hast die Flasche schon mitgenommen.");
+                Console.WriteLine("\nDu hast die Flasche schon mitgenommen.");
             }
             else
             {
-                var Choice = Input.Run("Die Flasche ist mit Wasser gefüllt. Möchtest du die Flasche mitnehmen? (Schreib: Ja/Nein)", Level1Choices, MenuChoices, YesNoChoices, yuzo);
+                var Choice = InputLevel1.Run("\nDie Flasche ist mit Wasser gefüllt. Möchtest du die Flasche mitnehmen? (Schreib: Ja/Nein)", Level1Choices, MenuChoices, YesNoChoices, yuzo, cave);
 
-                if (yuzo.HasBasket)
+                if (cave.bottleStanding && yuzo.Inventory != null)
                 {
                     switch (Choice)
                     {
                         case "ja":
-                            yuzo.HasBottle = true;
+                            cave.Bottle = null;
                             yuzo.Take(new PumpkinBottle());
                             Console.WriteLine("Du verstaust die Flasche in den Korb. \n(Gebe Inventar ein um dir die Flasche anzusehen)");
                             break;
                         case "nein":
                             Console.WriteLine("Du lässt die Flasche stehen");
-                            PlayLevel1(yuzo);
+                            PlayLevel1(yuzo, cave);
                             break;
                         default:
                             GameText.InvalidInput();
-                            GoToBasketLevel1(yuzo);
+                            GoToBasketLevel1(yuzo, cave);
                             break;
                     }
                 }
@@ -184,30 +178,30 @@ namespace Game
                     switch (Choice)
                     {
                         case "ja":
-                            Console.WriteLine("Vielleicht kannst du die Flasche mitnehmen, wenn du sie verstauen kannst.");
+                            Console.WriteLine("\nVielleicht kannst du die Flasche mitnehmen, wenn du sie verstauen kannst.");
                             break;
                         case "nein":
                             Console.WriteLine("Du lässt die Flasche liegen.");
                             break;
                         default:
                             GameText.InvalidInput();
-                            GoToBottleLevel1(yuzo);
+                            GoToBottleLevel1(yuzo, cave);
                             break;
                     }
                 }
             }
-            PlayLevel1(yuzo);
+            PlayLevel1(yuzo, cave);
         }
-        public static void LeaveCave(Yuzo yuzo)
+        public static void LeaveCave(Yuzo yuzo, Cave cave)
         {
-            if(yuzo.HasBasket && yuzo.HasBottle && yuzo.HasStick)
+            if (yuzo.Inventory != null && yuzo.Inventory.Contains(cave.Bottle) && yuzo.YuzosWeapon != null)
             {
-                Level2.StartLevel2(yuzo);
+                Level2.IntroLevel2(yuzo);
             }
             else
             {
-                Console.WriteLine("Du solltest dich noch umgucken, vielleicht hast du was vergessen was nützlich sein könnte.");
-                PlayLevel1(yuzo);
+                Console.WriteLine("\nDu solltest dich noch umgucken, vielleicht hast du was vergessen was nützlich sein könnte.");
+                PlayLevel1(yuzo, cave);
             }
         }
     }

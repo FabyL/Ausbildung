@@ -22,14 +22,15 @@ namespace Game
         }
         public static void BattleRound(Yuzo yuzo, DrunkStranger drunkStranger)
         {
-            var yuzoAttack = drunkStranger.HealthPoints - yuzo.YuzosWeapon.Damage;
+            Random rnd = new Random();
+            var yuzoAttack = drunkStranger.HealthPoints - rnd.Next(0, yuzo.YuzosWeapon.Damage);
             drunkStranger.HealthPoints = yuzoAttack;
             Console.WriteLine($"{yuzo.Name} benutzt {yuzo.YuzosWeapon.Name} und {yuzo.YuzosWeapon.Attack}");
             Console.WriteLine($"Der Fremde hat noch: {drunkStranger.HealthPoints}HP");
 
             if (!drunkStranger.Dead)
             {
-                var drunkStrangerAttack = yuzo.HealthPoints - drunkStranger.DrunkStrangersWeapon.Damage;
+                var drunkStrangerAttack = yuzo.HealthPoints - rnd.Next(0, drunkStranger.DrunkStrangersWeapon.Damage);
                 yuzo.HealthPoints = drunkStrangerAttack;
                 Console.WriteLine($"Der Fremde benutzt {drunkStranger.DrunkStrangersWeapon.Name} und {drunkStranger.DrunkStrangersWeapon.Attack}");
                 Console.WriteLine($"{yuzo.Name} hat noch : {yuzo.HealthPoints}HP");
@@ -40,10 +41,16 @@ namespace Game
             if (yuzo.Dead)
             {
                 Console.WriteLine("Du wurdest von dem Fremden besiegt.");
+                Adventure.StartGame();
             }
             else if (drunkStranger.Dead)
             {
-                Console.WriteLine("Du hast den Fremden besiegt.");
+                Console.WriteLine("Du hast den Fremden besiegt und erhälst 22 XP.");
+                int xpGain = 22;
+                var addXP = yuzo.ExperiencePoints + xpGain;
+                yuzo.ExperiencePoints = addXP;
+                yuzo.LevelUp1Yuzo(yuzo);
+                Console.WriteLine("Du bist jetzt Level 2. Gebe XP ein um deine Erfahrungspunkte und dein Level zu sehen.");
             }
         }
     }

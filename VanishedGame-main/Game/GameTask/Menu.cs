@@ -10,30 +10,33 @@ namespace Game
 {
     class Menu
     {
-        public static void Run(string userInput, Yuzo yuzo)
+        public static void Run(string userInput, Yuzo yuzo, Cave cave)
         {
             switch(userInput)
             {
+                case "quit":
+                    QuitGame(yuzo, cave);
+                    break;
                 case "reset":
                     Console.WriteLine("\n");
                     Adventure.StartGame();
-                    break;
-                case "quit":
-                    QuitGame(yuzo);
-                    break;
+                    break;                    
                 case "hp":
-                    ShowHP(yuzo);
+                    ShowHP(yuzo, cave);
+                    break;
+                case "xp":
+                    ShowXP(yuzo, cave);
                     break;
                 case "inventar":
-                    OpenInventory(yuzo);
+                    OpenInventory(yuzo, cave);
                     break;
                 case "waffe":
-                    InspectWeapon(yuzo);
-                    Adventure.PlayLevel1(yuzo);
+                    InspectWeapon(yuzo, cave);
+                    Adventure.PlayLevel1(yuzo, cave);
                     break;
             }
         }
-        public static void QuitGame(Yuzo yuzo)
+        public static void QuitGame(Yuzo yuzo, Cave cave)
         {
             Console.WriteLine("Möchtest du das Spiel beenden? (ja/nein)");
             var Choice = Console.ReadLine().ToLower();
@@ -46,20 +49,25 @@ namespace Game
                     Environment.Exit(0);
                     break;
                 case "nein":
-                    Adventure.PlayLevel1(yuzo);
+                    Adventure.PlayLevel1(yuzo, cave);
                     break;
                 default:
                     Console.WriteLine("Bitte wähle eine Möglichkeit aus.");
-                    QuitGame(yuzo);
+                    QuitGame(yuzo, cave);
                     break;
             }
         }
-        public static void ShowHP(Yuzo yuzo)
+        public static void ShowHP(Yuzo yuzo, Cave cave)
         {
             Console.WriteLine("Du hast {0} Leben", yuzo.HealthPoints);
-            Adventure.PlayLevel1(yuzo);
+            Adventure.PlayLevel1(yuzo, cave);
         }
-        public static void OpenInventory(Yuzo yuzo)
+        public static void ShowXP(Yuzo yuzo, Cave cave)
+        {
+            Console.WriteLine("Du bist Level {0} und hast {1}XP", yuzo.YuzoLevel, yuzo.ExperiencePoints);
+            Level2.StartLevel2(yuzo);
+        }
+        public static void OpenInventory(Yuzo yuzo, Cave cave)
         {
             if (yuzo.Inventory != null)
             {
@@ -75,9 +83,9 @@ namespace Game
             {
                 Console.WriteLine("Dein Inventar ist leer.");
             }
-            Adventure.PlayLevel1(yuzo);
+            Adventure.PlayLevel1(yuzo, cave);
         }
-        public static void InspectWeapon(Yuzo yuzo)
+        public static void InspectWeapon(Yuzo yuzo, Cave cave)
         {
             if (yuzo.YuzosWeapon != null)
             {
@@ -87,7 +95,7 @@ namespace Game
             {
                 Console.WriteLine("Du hast keine Waffe.");
             }
-            Adventure.PlayLevel1(yuzo);
+            Adventure.PlayLevel1(yuzo, cave);
         }
     }
 }

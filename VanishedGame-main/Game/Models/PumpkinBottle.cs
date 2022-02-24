@@ -50,9 +50,8 @@ namespace Game
             }
             else
             {
-                Console.WriteLine("Flasche leer");
-            }
-            
+                Console.WriteLine("Die Flasche ist leer.");
+            }          
         }
     }
 }
