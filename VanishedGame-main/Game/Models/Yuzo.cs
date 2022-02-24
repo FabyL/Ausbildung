@@ -12,9 +12,9 @@ namespace Game
         public string Name = "Yuzo";
         public int MaxHealthPoints = 70;
         public int HealthPoints;
-        public bool HasBasket;
-        public bool HasBottle;
-        public bool HasStick;
+        public int YuzoLevel = 1;
+        public int ExperiencePoints = 0;
+        public int Gold = 0;
         public Weapon YuzosWeapon;
         public Item YuzosItem;
         public Item[] Inventory;
@@ -25,7 +25,21 @@ namespace Game
                 return HealthPoints <= 0;
             }
         }
-
+        public bool LevelUp1
+        {
+            get
+            {
+                return ExperiencePoints >= 20;
+            }
+        }
+        public int LevelUp1Yuzo(Yuzo yuzo)
+        {
+            if (LevelUp1)
+            {
+                return YuzoLevel++;
+            }
+            return 0;
+        }
         public bool Take(Item item)
         {
             bool itemStored = false;
@@ -53,7 +67,6 @@ namespace Game
             }
             return hasUsedBottle;
         }
-
         private PumpkinBottle GetBottleFromInventory()
         {
             PumpkinBottle returnbottle = null;

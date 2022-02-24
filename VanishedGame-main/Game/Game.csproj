@@ -43,12 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GamePrompt\GameText.cs" />
-    <Compile Include="GamePrompt\Menu.cs" />
+    <Compile Include="GameTask\LevelGeneration.cs" />
+    <Compile Include="GameTask\GameText.cs" />
+    <Compile Include="GameTask\Menu.cs" />
+    <Compile Include="Level 2\Level2Functions.cs" />
+    <Compile Include="Models\Cave.cs" />
+    <Compile Include="Models\CaveExitLevel2.cs" />
     <Compile Include="Models\Character.cs" />
     <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\DrunkStranger.cs" />
+    <Compile Include="Models\Note.cs" />
     <Compile Include="Models\PumpkinBottle.cs" />
     <Compile Include="User\Adventure.cs" />
     <Compile Include="Program.cs" />
@@ -58,11 +63,14 @@
     <Compile Include="User\AdventureFunctions.cs" />
     <Compile Include="User\Battle.cs" />
     <Compile Include="User\Level2.cs" />
-    <Compile Include="Utilities\Input.cs" />
+    <Compile Include="Utilities\InputLevel1.cs" />
+    <Compile Include="Utilities\InputLevel2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Level 1\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
